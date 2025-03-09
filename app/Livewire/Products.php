@@ -12,15 +12,23 @@ class Products extends Component
 {
     use WithPagination;
     public $user_id;
+
     public function mount()
     {
         $this->user_id = auth()->user()->id;
     }
-    public function deleteProduct($id)
+    public function deleteProduct($product_id)
     {
         $admin = User::where('is_admin', 1)->first();
-        $user_id = auth()->user()->id;
-        broadcast(new AdminNotificationEvent($id, $admin->id, $user_id));
+        $user = auth()->user();
+        $user_name = $user->name;
+
+        $product = Product::where('user_id', $this->user_id)
+            ->where('id', $product_id)
+            ->first();
+
+
+        broadcast(new AdminNotificationEvent($product_id, $admin->id, $user->id, $user_name, $product->product_name));
     }
 
 
@@ -31,10 +39,10 @@ class Products extends Component
         $product = Product::findOrFail($product_id);
         if ($is_product_delete === 'YES') {
             if ($product->delete()) {
-                flash()->success('Product Delete successfully');
+                flash()->success('Your Product Deleted successfully');
             }
         } else {
-            $msg = $product->product_name . " " . "You can't delete";
+            $msg = "You can't delete this product";
             flash()->error($msg);
         }
     }

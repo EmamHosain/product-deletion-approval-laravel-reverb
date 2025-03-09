@@ -20,14 +20,6 @@ class AdminDashboard extends Component
     }
 
 
-    public function callFun($product_id)
-    {
-
-        $product = Product::find($product_id);
-        $msg = $product->product_name . " " . "deleted!";
-        flash()->success($msg);
-    }
-
     public function sendProductDeletePermission($user_id, $product_id, $is_product_delete)
     {
         // dd("hello");

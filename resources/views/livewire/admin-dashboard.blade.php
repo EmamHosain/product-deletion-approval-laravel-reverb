@@ -29,39 +29,30 @@
                     console.log('Notification received:', event);
                     // component.callFun(event.product_id);
 
+                    let productName = event.product_name;
+                    let userName = event.user_name;
+
                     // sweet alert fire start here
                     Swal.fire({
-                        title: "Are you sure?",
-                        text: "You won't be able to revert this!",
+                        title: "Are You Agree?",
+                        text: `${userName} wants to delete his product is : ${productName}`,
                         icon: "warning",
                         showCancelButton: true,
                         confirmButtonColor: "#3085d6",
                         cancelButtonColor: "#d33",
-                        confirmButtonText: "Yes, delete it!"
+                        confirmButtonText: "OK, I Agree!"
                     }).then((result) => {
                         if (result.isConfirmed) {
-
                             // comfirm
                             productDelete = "YES";
                             component.sendProductDeletePermission(event.user_id, event.product_id,
                                 productDelete)
-
-                            Swal.fire({
-                                title: "Deleted!",
-                                text: "Your file has been deleted.",
-                                icon: "success"
-                            });
                         } else {
                             // not confirm
                             productDelete = "NO";
                             component.sendProductDeletePermission(event.user_id, event.product_id,
                                 productDelete)
 
-                            Swal.fire({
-                                title: "Something went wrong",
-                                text: "Not Deleted",
-                                icon: "warning"
-                            });
                         }
                     });
                     // sweet alert fire end here

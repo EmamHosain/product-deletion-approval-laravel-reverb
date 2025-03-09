@@ -2,14 +2,16 @@
 
 namespace App\Events;
 
+use App\Models\User;
+use App\Models\Product;
 use Illuminate\Broadcasting\Channel;
-use Illuminate\Broadcasting\InteractsWithSockets;
-use Illuminate\Broadcasting\PresenceChannel;
+use Illuminate\Queue\SerializesModels;
 use Illuminate\Broadcasting\PrivateChannel;
+use Illuminate\Broadcasting\PresenceChannel;
+use Illuminate\Foundation\Events\Dispatchable;
+use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcastNow;
-use Illuminate\Foundation\Events\Dispatchable;
-use Illuminate\Queue\SerializesModels;
 
 class AdminNotificationEvent implements ShouldBroadcastNow
 {
@@ -21,11 +23,17 @@ class AdminNotificationEvent implements ShouldBroadcastNow
     public $product_id;
     public $admin_id;
     public $user_id;
-    public function __construct($product_id, $admin_id, $user_id)
+    public $user_name;
+    public $product_name;
+    public function __construct($product_id, $admin_id, $user_id, $user_name, $product_name)
     {
         $this->product_id = $product_id;
         $this->admin_id = $admin_id;
         $this->user_id = $user_id;
+        
+        $this->user_name = $user_name;
+        $this->product_name = $product_name;
+
     }
 
     /**
@@ -50,6 +58,8 @@ class AdminNotificationEvent implements ShouldBroadcastNow
             'admin_id' => $this->admin_id,
             'product_id' => $this->product_id,
             'user_id' => $this->user_id,
+            'user_name' => $this->user_name,
+            'product_name' => $this->product_name,
         ];
     }
 }

@@ -1,6 +1,6 @@
 # Product Deletion Approval System | Laravel, Livewire & Reverb
 
-A web application built with Laravel, Livewire, and Reverb, where users can request to delete their products. The deletion request requires admin approval before the product is permanently removed.
+A web application built with Laravel, Livewire, and Reverb, where users can request to delete their products. The deletion request requires admin approval before the product is permanently removed. The process is handled with real-time notifications, ensuring that both users and admins receive instant updates on the request status. Admins can accept or decline the request in real-time, and the product will only be deleted upon approval.
 
 ## Project Gallery
 

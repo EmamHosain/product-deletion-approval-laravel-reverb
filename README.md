@@ -50,10 +50,15 @@ npm install
 npm run dev
 ```
 
+5. **Generate Admin nad Some Fake Users and Products**
+   
+```shell
+php artisan migrate:fresh --seed
+```
+   
 5. **Run the application:**
 
 ```shell
 php artisan serve
-php artisan migrate:fresh --seed
 php artisan reverb:start --debug
 ```
